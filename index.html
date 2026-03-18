@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Cristina Spa · Un santuario de belleza y bienestar en La Paz, Bolivia.">
+  <title>Cristina Spa · La Paz, Bolivia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold:       #c9a96e;
+      --gold-light: #e8d5a3;
+      --dark:       #1c1310;
+      --dark-mid:   #3d2318;
+      --text:       #3d2b1f;
+      --muted:      #967f72;
+      --white:      #ffffff;
+      --border:     rgba(201, 169, 110, 0.22);
+      --shadow-sm:  0 2px 10px rgba(0,0,0,0.05);
+      --shadow-md:  0 6px 22px rgba(0,0,0,0.09);
+    }
+
+    html { -webkit-tap-highlight-color: transparent; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(160deg, #fdf9f4 0%, #faf2ea 55%, #f7e8e8 100%);
+      min-height: 100vh;
+      color: var(--text);
+    }
+
+    /* ── Layout ── */
+    .page {
+      max-width: 460px;
+      margin: 0 auto;
+      padding: 44px 18px 64px;
+    }
+
+    /* ── Top ornament ── */
+    .ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+    .ornament .line {
+      display: block;
+      height: 1px;
+      width: 56px;
+    }
+    .ornament .line-l { background: linear-gradient(to right, transparent, var(--gold)); }
+    .ornament .line-r { background: linear-gradient(to left,  transparent, var(--gold)); }
+    .ornament .diamond {
+      width: 6px; height: 6px;
+      background: var(--gold);
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+
+    /* ── Profile ── */
+    .profile {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    /* Logo image */
+    .logo-wrap {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      margin: 0 auto 18px;
+      position: relative;
+    }
+    .logo-wrap::after {
+      content: '';
+      position: absolute;
+      inset: -5px;
+      border-radius: 50%;
+      border: 1px solid var(--gold-light);
+      opacity: 0.75;
+      pointer-events: none;
+    }
+    .logo-img {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--white);
+      box-shadow: 0 6px 28px rgba(201, 169, 110, 0.35);
+      display: block;
+    }
+    /* Fallback si la imagen no carga */
+    .logo-img::after {
+      content: 'CS';
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 34px;
+      font-weight: 600;
+      color: var(--white);
+      border-radius: 50%;
+    }
+
+    .name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 30px;
+      font-weight: 600;
+      color: var(--dark);
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+    .tagline {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .meta-item svg { opacity: 0.7; flex-shrink: 0; }
+
+    /* ── Section divider ── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 4px 0;
+    }
+    .divider::before, .divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+    .divider span {
+      font-size: 9.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── Links container ── */
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* ── Base card ── */
+    .card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 15px 18px;
+      text-decoration: none;
+      color: var(--text);
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      box-shadow: var(--shadow-sm);
+      -webkit-user-select: none;
+      user-select: none;
+      cursor: pointer;
+    }
+    .card:hover    { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--gold-light); }
+    .card:active   { transform: scale(0.985); box-shadow: var(--shadow-sm); }
+
+    /* CTA (Contáctanos) */
+    .card.cta {
+      background: linear-gradient(125deg, var(--dark) 0%, var(--dark-mid) 100%);
+      border-color: rgba(201,169,110,0.32);
+      color: var(--gold-light);
+      box-shadow: 0 6px 24px rgba(28,19,16,0.28);
+      position: relative;
+      overflow: hidden;
+    }
+    .card.cta::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -60%;
+      width: 60%; height: 200%;
+      background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.06) 50%, transparent 60%);
+      animation: sheen 4s ease-in-out infinite;
+    }
+    @keyframes sheen { 0%,100%{ left:-60%; } 50%{ left:110%; } }
+    .card.cta:hover { box-shadow: 0 10px 32px rgba(28,19,16,0.38); border-color: rgba(201,169,110,0.6); }
+    .card.cta .icon { color: var(--gold); }
+    .card.cta .arrow { color: var(--gold); opacity: 0.9; }
+
+    /* Social cards variantes */
+    .card.instagram { border-color: rgba(225,48,108,0.22); }
+    .card.instagram:hover { border-color: rgba(225,48,108,0.45); }
+    .card.facebook  { border-color: rgba(24,119,242,0.22); }
+    .card.facebook:hover  { border-color: rgba(24,119,242,0.45); }
+    .card.tiktok    { border-color: rgba(0,0,0,0.14); }
+    .card.tiktok:hover    { border-color: rgba(0,0,0,0.3); }
+
+    /* Social icon circle */
+    .social-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .social-circle svg { width: 20px; height: 20px; fill: var(--white); display: block; }
+    .social-circle.ig-bg  { background: radial-gradient(circle at 30% 107%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%); }
+    .social-circle.fb-bg  { background: #1877f2; }
+    .social-circle.tt-bg  { background: #010101; }
+
+    /* Catalog card */
+    .card.catalog {
+      background: linear-gradient(125deg, #2a1f1a 0%, #3d2b1f 100%);
+      border-color: rgba(201,169,110,0.35);
+      color: var(--gold-light);
+      box-shadow: 0 4px 18px rgba(28,19,16,0.2);
+    }
+    .card.catalog:hover { box-shadow: 0 8px 28px rgba(28,19,16,0.32); border-color: var(--gold); }
+    .card.catalog .icon { color: var(--gold); }
+    .card.catalog .arrow { color: var(--gold); opacity: 0.9; }
+    .card.catalog .link-sub { color: rgba(232,213,163,0.6); }
+
+    /* Card parts */
+    .icon { font-size: 20px; width: 26px; text-align: center; flex-shrink: 0; }
+
+    .link-text { flex: 1; min-width: 0; }
+    .link-title { font-size: 13.5px; font-weight: 500; letter-spacing: 0.02em; }
+    .link-sub   { font-size: 11px; opacity: 0.6; margin-top: 2px; }
+
+    .arrow { color: var(--gold); font-size: 18px; flex-shrink: 0; opacity: 0.65; }
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center;
+      margin-top: 44px;
+    }
+    .footer-dots {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .footer-dots span {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--gold-light);
+      opacity: 0.6;
+    }
+    .footer-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px;
+      letter-spacing: 0.08em;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+    .footer-copy {
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Ornamento superior -->
+  <div class="ornament">
+    <span class="line line-l"></span>
+    <div class="diamond"></div>
+    <span class="line line-r"></span>
+  </div>
+
+  <!-- Perfil -->
+  <div class="profile">
+    <div class="logo-wrap">
+      <img
+        src="logo-cristina_spa.png"
+        alt="Cristina Spa"
+        class="logo-img"
+        onerror="this.style.display='none'; this.parentElement.querySelector('.logo-fallback').style.display='flex';"
+      >
+      <!-- Fallback si no existe la imagen -->
+      <div class="logo-fallback" style="display:none; width:110px; height:110px; border-radius:50%; background:linear-gradient(135deg,#e8d5a3,#c9a96e); align-items:center; justify-content:center; font-family:'Cormorant Garamond',serif; font-size:34px; font-weight:600; color:#fff; border:3px solid #fff; box-shadow:0 6px 28px rgba(201,169,110,0.35);">CS</div>
+    </div>
+    <h1 class="name">Cristina Spa</h1>
+    <p class="tagline">Belleza &amp; Bienestar · Desde 2006</p>
+    <div class="meta">
+      <span class="meta-item">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        La Paz, Bolivia
+      </span>
+      <span class="meta-item">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+        4 Sucursales
+      </span>
+    </div>
+  </div>
+
+  <div class="links">
+
+    <!-- ══ 1. CONTÁCTANOS ══ -->
+    <a href="https://wa.me/59176768796?text=Hola%2C%20me%20gustaría%20comunicarme%20con%20Cristina%20Spa%20✨"
+       target="_blank" rel="noopener noreferrer" class="card cta">
+      <span class="icon">💬</span>
+      <div class="link-text">
+        <div class="link-title">Contáctanos</div>
+        <div class="link-sub">Escríbenos por WhatsApp</div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <!-- ══ 2. REDES SOCIALES ══ -->
+    <div class="divider"><span>Redes Sociales</span></div>
+
+    <a href="https://www.instagram.com/cristinaspaoficial"
+       target="_blank" rel="noopener noreferrer" class="card instagram">
+      <div class="social-circle ig-bg">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+      </div>
+      <div class="link-text">
+        <div class="link-title">Instagram</div>
+        <div class="link-sub">@cristinaspaoficial</div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a href="https://www.facebook.com/CristinaSpaOficial"
+       target="_blank" rel="noopener noreferrer" class="card facebook">
+      <div class="social-circle fb-bg">
+        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      </div>
+      <div class="link-text">
+        <div class="link-title">Facebook</div>
+        <div class="link-sub">CristinaSpaOficial</div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a href="https://www.tiktok.com/@cristinaspalapaz"
+       target="_blank" rel="noopener noreferrer" class="card tiktok">
+      <div class="social-circle tt-bg">
+        <svg viewBox="0 0 24 24"><path fill="white" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+      </div>
+      <div class="link-text">
+        <div class="link-title">TikTok</div>
+        <div class="link-sub">@cristinaspalapaz</div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <!-- ══ 3. CATÁLOGO ══ -->
+    <div class="divider"><span>Catálogo</span></div>
+
+    <a href="cartilla-precios.pdf" target="_blank" rel="noopener noreferrer" class="card catalog">
+      <span class="icon">📋</span>
+      <div class="link-text">
+        <div class="link-title">Cartilla de Precios</div>
+        <div class="link-sub">Ver lista de servicios y precios · PDF</div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <!-- ══ 4. SUCURSALES ══ -->
+    <div class="divider"><span>Sucursales</span></div>
+
+    <a href="https://www.google.com/maps/search/Hotel+Gloria+La+Paz+Bolivia"
+       target="_blank" rel="noopener noreferrer" class="card">
+      <span class="icon">📍</span>
+      <div class="link-text">
+        <div class="link-title">Hotel Gloria · Zona Central</div>
+        <div class="link-sub">Lun–Sáb 9:00–20:00 · 76768798</div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a href="https://www.google.com/maps/search/San+Miguel+La+Paz+Bolivia"
+       target="_blank" rel="noopener noreferrer" class="card">
+      <span class="icon">📍</span>
+      <div class="link-text">
+        <div class="link-title">San Miguel · Zona Sur</div>
+        <div class="link-sub">Mar–Sáb 9:00–20:00 · 76769723</div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a href="https://www.google.com/maps/search/Calacoto+La+Paz+Bolivia"
+       target="_blank" rel="noopener noreferrer" class="card">
+      <span class="icon">📍</span>
+      <div class="link-text">
+        <div class="link-title">Calacoto · Zona Sur</div>
+        <div class="link-sub">Lun–Sáb 9:00–20:00 · 76768796</div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a href="https://www.google.com/maps/search/Achumani+La+Paz+Bolivia"
+       target="_blank" rel="noopener noreferrer" class="card">
+      <span class="icon">📍</span>
+      <div class="link-text">
+        <div class="link-title">Achumani · Zona Sur</div>
+        <div class="link-sub">Mar–Sáb 9:00–20:00 · 67097032</div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-dots">
+      <span></span><span></span><span></span>
+    </div>
+    <p class="footer-brand">Cristina Spa</p>
+    <p class="footer-copy">© 2026 · La Paz, Bolivia · Desde 2006</p>
+  </div>
+
+</div>
+</body>
+</html>
