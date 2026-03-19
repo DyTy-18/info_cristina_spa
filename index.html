@@ -265,6 +265,145 @@
 
     .arrow { color: var(--gold); font-size: 18px; flex-shrink: 0; opacity: 0.65; }
 
+    /* ── Paquetes acordeón ── */
+    .pkg-toggle {
+      width: 100%;
+      border: none;
+      font-family: 'Nunito', sans-serif;
+      cursor: pointer;
+      text-align: left;
+    }
+    .pkg-toggle .chevron {
+      color: var(--gold);
+      font-size: 18px;
+      flex-shrink: 0;
+      opacity: 0.65;
+      transition: transform 0.3s ease;
+    }
+    .pkg-toggle.open .chevron {
+      transform: rotate(90deg);
+    }
+
+    /* Panel expandible */
+    .pkg-tiers {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.35s ease;
+    }
+    .pkg-tiers.open {
+      grid-template-rows: 1fr;
+    }
+    .pkg-tiers-inner {
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding-top: 8px;
+    }
+
+    /* Tier card */
+    .tier-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px 18px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .tier-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+    .tier-name {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .tier-dot {
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+    .tier-price {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .tier-tagline {
+      font-size: 11.5px;
+      color: var(--muted);
+      margin-bottom: 10px;
+      font-style: italic;
+    }
+
+    .tier-sep {
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 10px;
+    }
+
+    .tier-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 14px;
+    }
+    .tier-features li {
+      font-size: 12px;
+      color: var(--text);
+      display: flex;
+      align-items: flex-start;
+      gap: 7px;
+    }
+    .tier-features li::before {
+      content: '✓';
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 11px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .tier-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      font-family: 'Nunito', sans-serif;
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .tier-btn:active { transform: scale(0.97); opacity: 0.85; }
+
+    /* Colores por nivel */
+    .esmeralda .tier-dot  { background: #2d9b6f; }
+    .esmeralda .tier-name { color: #2d7a58; }
+    .esmeralda .tier-btn  { background: #2d9b6f; color: #fff; }
+
+    .rubi .tier-dot  { background: #b83e42; }
+    .rubi .tier-name { color: #962f33; }
+    .rubi .tier-btn  { background: #b83e42; color: #fff; }
+
+    .diamante .tier-dot  { background: var(--gold); }
+    .diamante .tier-name { color: #9a7535; }
+    .diamante .tier-btn  { background: linear-gradient(125deg, var(--dark), var(--dark-mid)); color: var(--gold-light); border: 1px solid rgba(201,169,110,0.4); }
+
     /* ── Footer ── */
     .footer {
       text-align: center;
@@ -399,7 +538,241 @@
       <span class="arrow">›</span>
     </a>
 
-    <!-- ══ 4. SUCURSALES ══ -->
+    <!-- ══ 4. PAQUETES ══ -->
+    <div class="divider"><span>Paquetes Especiales</span></div>
+
+    <!-- NOVIAS -->
+    <div class="pkg-group">
+      <button class="card pkg-toggle" onclick="togglePkg('novias')">
+        <span class="icon">👰</span>
+        <div class="link-text">
+          <div class="link-title">Paquete Novias</div>
+          <div class="link-sub">3 niveles · Desde Bs. 450</div>
+        </div>
+        <span class="chevron">›</span>
+      </button>
+      <div class="pkg-tiers" id="tiers-novias">
+        <div class="pkg-tiers-inner">
+
+          <div class="tier-card esmeralda">
+            <div class="tier-header">
+              <span class="tier-name"><span class="tier-dot"></span>Esmeralda</span>
+              <span class="tier-price">Desde Bs. 450</span>
+            </div>
+            <p class="tier-tagline">Tu transformación esencial para el gran día</p>
+            <div class="tier-sep"></div>
+            <ul class="tier-features">
+              <li>Lavado y peinado profesional</li>
+              <li>Maquillaje de novia básico</li>
+              <li>Manicura simple + perfilado de cejas</li>
+              <li>Tratamiento capilar express</li>
+            </ul>
+            <a href="https://wa.me/59176768796?text=Hola%2C%20me%20interesa%20el%20Paquete%20Novias%20Esmeralda%20👰%20(Desde%20Bs.%20450)"
+               target="_blank" rel="noopener noreferrer" class="tier-btn">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Reservar
+            </a>
+          </div>
+
+          <div class="tier-card rubi">
+            <div class="tier-header">
+              <span class="tier-name"><span class="tier-dot"></span>Rubí</span>
+              <span class="tier-price">Desde Bs. 850</span>
+            </div>
+            <p class="tier-tagline">La elección más elegida por nuestras novias</p>
+            <div class="tier-sep"></div>
+            <ul class="tier-features">
+              <li>Todo lo del Esmeralda</li>
+              <li>Maquillaje de gala con pestañas</li>
+              <li>Manicura en gel + pedicura</li>
+              <li>Tratamiento Kérastase + sesión de prueba</li>
+            </ul>
+            <a href="https://wa.me/59176768796?text=Hola%2C%20me%20interesa%20el%20Paquete%20Novias%20Rubí%20👰%20(Desde%20Bs.%20850)"
+               target="_blank" rel="noopener noreferrer" class="tier-btn">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Reservar
+            </a>
+          </div>
+
+          <div class="tier-card diamante">
+            <div class="tier-header">
+              <span class="tier-name"><span class="tier-dot"></span>Diamante</span>
+              <span class="tier-price">A consultar</span>
+            </div>
+            <p class="tier-tagline">La experiencia definitiva, sin límites</p>
+            <div class="tier-sep"></div>
+            <ul class="tier-features">
+              <li>Todo lo del Rubí</li>
+              <li>Colorimetría o balayage premium</li>
+              <li>Spa facial + Kérastase de lujo</li>
+              <li>Imagen dedicada · Servicio a domicilio</li>
+            </ul>
+            <a href="https://wa.me/59176768796?text=Hola%2C%20me%20interesa%20el%20Paquete%20Novias%20Diamante%20💎"
+               target="_blank" rel="noopener noreferrer" class="tier-btn">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Consultar
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- QUINCEAÑERAS -->
+    <div class="pkg-group">
+      <button class="card pkg-toggle" onclick="togglePkg('xv')">
+        <span class="icon">👑</span>
+        <div class="link-text">
+          <div class="link-title">Quinceañeras</div>
+          <div class="link-sub">3 niveles · Desde Bs. 380</div>
+        </div>
+        <span class="chevron">›</span>
+      </button>
+      <div class="pkg-tiers" id="tiers-xv">
+        <div class="pkg-tiers-inner">
+
+          <div class="tier-card esmeralda">
+            <div class="tier-header">
+              <span class="tier-name"><span class="tier-dot"></span>Esmeralda</span>
+              <span class="tier-price">Desde Bs. 380</span>
+            </div>
+            <p class="tier-tagline">El inicio de tu noche de gala perfecta</p>
+            <div class="tier-sep"></div>
+            <ul class="tier-features">
+              <li>Lavado y peinado de gala</li>
+              <li>Maquillaje básico de fiesta</li>
+              <li>Manicura temática + perfilado de cejas</li>
+              <li>Desmaquillado incluido</li>
+            </ul>
+            <a href="https://wa.me/59176768796?text=Hola%2C%20me%20interesa%20el%20Paquete%20Quinceañeras%20Esmeralda%20👑%20(Desde%20Bs.%20380)"
+               target="_blank" rel="noopener noreferrer" class="tier-btn">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Reservar
+            </a>
+          </div>
+
+          <div class="tier-card rubi">
+            <div class="tier-header">
+              <span class="tier-name"><span class="tier-dot"></span>Rubí</span>
+              <span class="tier-price">Desde Bs. 720</span>
+            </div>
+            <p class="tier-tagline">La elección de las princesas de La Paz</p>
+            <div class="tier-sep"></div>
+            <ul class="tier-features">
+              <li>Todo lo del Esmeralda</li>
+              <li>Maquillaje artístico con pestañas</li>
+              <li>Manicura gel + pedicura + tratamiento L'Oréal</li>
+              <li>Prueba de look previa incluida</li>
+            </ul>
+            <a href="https://wa.me/59176768796?text=Hola%2C%20me%20interesa%20el%20Paquete%20Quinceañeras%20Rubí%20👑%20(Desde%20Bs.%20720)"
+               target="_blank" rel="noopener noreferrer" class="tier-btn">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Reservar
+            </a>
+          </div>
+
+          <div class="tier-card diamante">
+            <div class="tier-header">
+              <span class="tier-name"><span class="tier-dot"></span>Diamante</span>
+              <span class="tier-price">A consultar</span>
+            </div>
+            <p class="tier-tagline">Una noche que recordarás toda la vida</p>
+            <div class="tier-sep"></div>
+            <ul class="tier-features">
+              <li>Todo lo del Rubí</li>
+              <li>Colorimetría o mechas creativas</li>
+              <li>Kérastase premium + spa facial</li>
+              <li>Manicura soft gel · Imagen completa · Domicilio</li>
+            </ul>
+            <a href="https://wa.me/59176768796?text=Hola%2C%20me%20interesa%20el%20Paquete%20Quinceañeras%20Diamante%20💎"
+               target="_blank" rel="noopener noreferrer" class="tier-btn">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Consultar
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- EVENTOS -->
+    <div class="pkg-group">
+      <button class="card pkg-toggle" onclick="togglePkg('eventos')">
+        <span class="icon">🎉</span>
+        <div class="link-text">
+          <div class="link-title">Eventos Especiales</div>
+          <div class="link-sub">3 niveles · Desde Bs. 300</div>
+        </div>
+        <span class="chevron">›</span>
+      </button>
+      <div class="pkg-tiers" id="tiers-eventos">
+        <div class="pkg-tiers-inner">
+
+          <div class="tier-card esmeralda">
+            <div class="tier-header">
+              <span class="tier-name"><span class="tier-dot"></span>Esmeralda</span>
+              <span class="tier-price">Desde Bs. 300</span>
+            </div>
+            <p class="tier-tagline">Imagen profesional para tu evento</p>
+            <div class="tier-sep"></div>
+            <ul class="tier-features">
+              <li>Peinado de fiesta</li>
+              <li>Maquillaje básico</li>
+              <li>Manicura simple</li>
+              <li>Asesoría de imagen express en sucursal</li>
+            </ul>
+            <a href="https://wa.me/59176768796?text=Hola%2C%20me%20interesa%20el%20Paquete%20Eventos%20Esmeralda%20🎉%20(Desde%20Bs.%20300)"
+               target="_blank" rel="noopener noreferrer" class="tier-btn">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Reservar
+            </a>
+          </div>
+
+          <div class="tier-card rubi">
+            <div class="tier-header">
+              <span class="tier-name"><span class="tier-dot"></span>Rubí</span>
+              <span class="tier-price">Desde Bs. 580</span>
+            </div>
+            <p class="tier-tagline">Para grupos y desfiles corporativos</p>
+            <div class="tier-sep"></div>
+            <ul class="tier-features">
+              <li>Todo lo del Esmeralda</li>
+              <li>Maquillaje artístico de evento</li>
+              <li>Manicura + pedicura coordinada</li>
+              <li>Equipo de 2 estilistas + coordinación grupal</li>
+            </ul>
+            <a href="https://wa.me/59176768796?text=Hola%2C%20me%20interesa%20el%20Paquete%20Eventos%20Rubí%20🎉%20(Desde%20Bs.%20580)"
+               target="_blank" rel="noopener noreferrer" class="tier-btn">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Reservar
+            </a>
+          </div>
+
+          <div class="tier-card diamante">
+            <div class="tier-header">
+              <span class="tier-name"><span class="tier-dot"></span>Diamante</span>
+              <span class="tier-price">A consultar</span>
+            </div>
+            <p class="tier-tagline">Experiencia VIP para desfiles y empresas</p>
+            <div class="tier-sep"></div>
+            <ul class="tier-features">
+              <li>Todo lo del Rubí</li>
+              <li>Equipo completo · Maquillaje artístico especializado</li>
+              <li>Asesoría de imagen integral</li>
+              <li>Servicio a domicilio + coordinación logística</li>
+            </ul>
+            <a href="https://wa.me/59176768796?text=Hola%2C%20me%20interesa%20el%20Paquete%20Eventos%20Diamante%20💎"
+               target="_blank" rel="noopener noreferrer" class="tier-btn">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Consultar
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ 5. SUCURSALES ══ -->
     <div class="divider"><span>Sucursales</span></div>
 
     <a href="https://www.google.com/maps/search/Hotel+Gloria+La+Paz+Bolivia"
@@ -454,5 +827,22 @@
   </div>
 
 </div>
+  <script>
+    function togglePkg(id) {
+      const panel = document.getElementById('tiers-' + id);
+      const btn   = panel.previousElementSibling;
+      const isOpen = panel.classList.contains('open');
+
+      // Cerrar todos
+      document.querySelectorAll('.pkg-tiers').forEach(el => el.classList.remove('open'));
+      document.querySelectorAll('.pkg-toggle').forEach(el => el.classList.remove('open'));
+
+      // Abrir el clickeado si estaba cerrado
+      if (!isOpen) {
+        panel.classList.add('open');
+        btn.classList.add('open');
+      }
+    }
+  </script>
 </body>
 </html>
